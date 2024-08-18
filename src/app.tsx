@@ -11,7 +11,6 @@ export function App() {
   if (!loaded) {
     return;
   }
-
   return (
     <SafeAreaView style={{ width: "100%", height: "100%" }}>
       <ThemeProvider>
@@ -24,13 +23,7 @@ export function App() {
             display: "flex",
             marginTop: 300,
           }}
-        >
-          <ItemList
-            desc="programa ai ne"
-            tittle="AAAAAAAAAAAH - o grito"
-            favorite={false}
-          />
-        </View>
+        ></View>
       </ThemeProvider>
     </SafeAreaView>
   );
