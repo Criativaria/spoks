@@ -4,12 +4,17 @@ const FAVORITE_CHANNELS_KEY = "FAVORITE_CHANNELS";
 
 export async function addFavoriteChannel(channelId: string) {
     try {
-        const favoritesChannels = await getFavoritesChannels();
-        if (favoritesChannels.includes(channelId)) {
-            return;
+        const favoritesChannels: string[] = await getFavoritesChannels();
+        if (favoritesChannels) {
+            if (favoritesChannels.includes(channelId)) {
+                return;
+            }
+            favoritesChannels.push(channelId)
+            await AsyncStorage.setItem(FAVORITE_CHANNELS_KEY, JSON.stringify(favoritesChannels))
         }
-        favoritesChannels.push(channelId)
-        await AsyncStorage.setItem(FAVORITE_CHANNELS_KEY, JSON.stringify(favoritesChannels))
+
+        await AsyncStorage.setItem(FAVORITE_CHANNELS_KEY, JSON.stringify([channelId]));
+
     } catch (error) {
         console.error("deu erro no addFavoritesChannels: " + error)
     }
@@ -29,7 +34,7 @@ export async function getFavoritesChannels(): Promise<string[]> {
 
 export async function removeFavoriteChannel(channelId: string) {
     try {
-        const favoritesChannels = await getFavoritesChannels();
+        const favoritesChannels: string[] = await getFavoritesChannels();
         const newFavorites: string[] = favoritesChannels.filter((item) => item !== channelId);
         await AsyncStorage.setItem(FAVORITE_CHANNELS_KEY, JSON.stringify(newFavorites));
     } catch (error) {
