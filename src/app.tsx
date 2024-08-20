@@ -10,6 +10,12 @@ import {
   removeFavoriteChannel,
 } from "./utils/storage/channels";
 import { useEffect } from "react";
+import {
+  addFavoriteProgram,
+  getFavoritesPrograms,
+  removeFavoriteProgram,
+} from "./utils/storage/program";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function App() {
   const [loaded] = useFont();
@@ -23,13 +29,34 @@ export function App() {
   }
 
   async function teste() {
-    console.log("list1 :", await getFavoritesChannels());
+    await AsyncStorage.clear();
 
-    await addFavoriteChannel("aaaaaaaaaaa");
-    console.log("list2 :", await getFavoritesChannels());
+    console.log("teste 1 = ", await getFavoritesPrograms()); //retornar []
 
-    await removeFavoriteChannel("aaaaaaaaaaa");
-    console.log("list3 :", await getFavoritesChannels());
+    await addFavoriteProgram({
+      category: "aaaaaaaaa",
+      channel: "aaaaaaaaaaa",
+      id: "aaaaaaaaaaaa",
+      name: "aaaaaaaaaaaa",
+    });
+    console.log("teste 2 = ", await getFavoritesPrograms()); //retornar [aaaaaaaaaaaaaa]
+
+    await addFavoriteProgram({
+      category: "aaaaaaaaa",
+      channel: "aaaaaaaaaaa",
+      id: "bbbbbbbbbbbbbb",
+      name: "aaaaaaaaaaaa",
+    });
+    console.log("teste 3 = ", await getFavoritesPrograms()); //retornar [aaaaaaaaaaaaaa]
+
+    await removeFavoriteProgram({
+      category: "aaaaaaaaa",
+      channel: "aaaaaaaaaaa",
+      id: "aaaaaaaaaaaa",
+      name: "aaaaaaaaaaaa",
+    });
+
+    console.log("teste 4 = ", await getFavoritesPrograms()); //retornar []
   }
 
   return (
