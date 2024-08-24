@@ -1,12 +1,13 @@
 export type ThemeData = {
-    backgroundColor: string;
-    white: string;
-    black: string;
-    primary: string;
+    backgroundColor: string
+    white: string
+    black: string
+    primary: string
     light_primary: string,
     ligth_grey: string
     font_bold: string
     font_regular: string
+    border: string
 }
 
 const lightTheme: ThemeData = {
@@ -17,8 +18,8 @@ const lightTheme: ThemeData = {
     primary: "#AA69FC",
     ligth_grey: "#E3E5D7",
     font_bold: "Inter_Extra_Bold",
-    font_regular: "Inter_Regular"
-
+    font_regular: "Inter_Regular",
+    border: "5"
 }
 
 export const themes = { //onde ficam armazenados todos os temas
