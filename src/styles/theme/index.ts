@@ -7,7 +7,6 @@ export type ThemeData = {
     ligth_grey: string
     font_bold: string
     font_regular: string
-    border: string
 }
 
 const lightTheme: ThemeData = {
@@ -19,7 +18,6 @@ const lightTheme: ThemeData = {
     ligth_grey: "#E3E5D7",
     font_bold: "Inter_Extra_Bold",
     font_regular: "Inter_Regular",
-    border: "5"
 }
 
 export const themes = { //onde ficam armazenados todos os temas

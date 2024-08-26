@@ -10,19 +10,19 @@ type ItemListType = {
 };
 
 export function ItemList({ title: title, desc, favorite }: ItemListType) {
-  const styles = makeStyle();
+  const style = makeStyle();
   const { theme } = useThemeContext();
 
   return (
-    <View style={styles.wrapper}>
+    <View style={style.wrapper}>
       <View>
-        <Text style={styles.tittle}>{title}</Text>
-        <Text style={styles.desc}>{desc}</Text>
+        <Text style={style.tittle}>{title}</Text>
+        <Text style={style.desc}>{desc}</Text>
       </View>
       <Heart
         color={favorite ? theme.primary : theme.black}
         strokeWidth={2}
-        size={28}
+        size={21}
         fill={favorite ? theme.primary : theme.ligth_grey}
       />
     </View>
