@@ -2,7 +2,6 @@ import { SafeAreaView, View } from "react-native";
 import { ThemeProvider } from "./context/theme/theme.provider";
 import { StatusBar } from "expo-status-bar";
 import { useFont } from "./hooks/use-font";
-import { ListView } from "./components/list";
 import { ChannelsPage } from "./pages/channel-page";
 
 export function App() {
@@ -22,7 +21,9 @@ export function App() {
             justifyContent: "center",
             display: "flex",
           }}
-        ></View>
+        >
+          <ChannelsPage />
+        </View>
       </ThemeProvider>
     </SafeAreaView>
   );
