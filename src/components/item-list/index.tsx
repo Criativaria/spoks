@@ -4,19 +4,19 @@ import { makeStyle } from "./styles";
 import { useThemeContext } from "../../context/theme/hooks/use-theme-context";
 
 type ItemListType = {
-  tittle: string;
+  title: string;
   desc: string;
   favorite: boolean;
 };
 
-export function ItemList({ tittle, desc, favorite }: ItemListType) {
+export function ItemList({ title: title, desc, favorite }: ItemListType) {
   const styles = makeStyle();
   const { theme } = useThemeContext();
 
   return (
     <View style={styles.wrapper}>
       <View>
-        <Text style={styles.tittle}>{tittle}</Text>
+        <Text style={styles.tittle}>{title}</Text>
         <Text style={styles.desc}>{desc}</Text>
       </View>
       <Heart
