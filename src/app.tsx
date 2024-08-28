@@ -17,9 +17,9 @@ export function App() {
         <View
           style={{
             flex: 1,
-            flexDirection: "row",
             justifyContent: "center",
             display: "flex",
+            padding: 40,
           }}
         >
           <ChannelsPage />
