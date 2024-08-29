@@ -4,19 +4,29 @@ import { getChannels } from "../../api/channels";
 
 
 export function useChannel() {
-    const [channelInfo, setChanelInfo] = useState<Channel[]>([]);
+    const [channels, setChannels] = useState<Channel[]>([]);
+    const [searchFilter, setSearchFilter] = useState("");
 
     useEffect(() => {
         getChannelsInfo();
     }, []);
 
     const getChannelsInfo = async () => {
-        const info = await getChannels();
-        setChanelInfo(info);
+        const channels = await getChannels();
+        setChannels(channels);
     };
 
+    const filterChannels = () => {
+        return channels.filter((channel) => {
+            return channel.name.toLowerCase().includes(searchFilter.toLowerCase())
+        })
+    }
+
     return {
-        channelInfo
+        channels,
+        searchFilter,
+        setSearchFilter,
+        filterChannels
     }
 
 }
