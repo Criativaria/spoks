@@ -1,5 +1,5 @@
 export type Program = {
-    id: number;
+    id: string;
     code: string;
     name: string;
     category: string;
