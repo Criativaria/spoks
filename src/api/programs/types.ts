@@ -9,4 +9,4 @@ export type Program = {
     created_at: string;
 };
 
-export type GetPrograms = (channelId: string) => Promise<Program[]>;
+export type GetPrograms = (channelCode: string) => Promise<Program[]>;
