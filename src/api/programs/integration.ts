@@ -3,9 +3,9 @@ import { Program, GetPrograms } from "./types";
 
 export const getPrograms: GetPrograms = async (channelCode: string) => {
     const API_URL: string = process.env.API_URL!;
-
+    
     try {
-        const axiosResult = await axios.get(`${API_URL}/programs`, { params: channelCode });
+        const axiosResult = await axios.get(`${API_URL}/program/${channelCode}`);
         const programsResult: Program[] = axiosResult.data || [];
 
         return programsResult;
