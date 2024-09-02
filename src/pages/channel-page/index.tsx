@@ -1,6 +1,6 @@
 import { FlatList, View } from "react-native";
 import { ItemList } from "../../components/item-list";
-import { PageTittle } from "../../components/page-tittle";
+import { PageTitle } from "../../components/page-tittle";
 import { useChannel } from "./use-channel";
 import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
@@ -14,18 +14,18 @@ export function ChannelsPage() {
     filterChannels,
     saveFavoriteChannel,
     isFavoriteChannel,
-    onlyFavorites,
-    toggleOnlyFavorites,
+    toggleFavorites,
+    showFavorites,
   } = useChannel();
 
   return (
     <View>
-      <PageTittle
+      <PageTitle
         arrow={false}
         heart={true}
-        title={toggleOnlyFavorites ? "Canais" : "Canais Favoritos"}
-        onlyFavorites={() => onlyFavorites()}
-        toogleOnlyFavorites={toggleOnlyFavorites}
+        title={showFavorites ? "Canais Favoritos" : "Canais"}
+        onFavoritesClick={() => toggleFavorites()}
+        isFavorites={showFavorites}
       />
 
       <SearchBar onChangeText={setSearchFilter} value={searchFilter} />

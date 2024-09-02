@@ -7,15 +7,15 @@ type PageTittleType = {
   title: string;
   heart: boolean;
   arrow: boolean;
-  onlyFavorites: () => void;
-  toogleOnlyFavorites: boolean;
+  onFavoritesClick: () => void;
+  isFavorites: boolean;
 };
 
-export function PageTittle({
+export function PageTitle({
   title,
   arrow,
-  onlyFavorites,
-  toogleOnlyFavorites,
+  onFavoritesClick,
+  isFavorites,
 }: PageTittleType) {
   const style = makeStyle();
   const { theme } = useThemeContext();
@@ -30,10 +30,10 @@ export function PageTittle({
       <View style={style.titleView}>
         <Text style={style.title}>{title}</Text>
       </View>
-      <Pressable onPress={() => onlyFavorites()}>
+      <Pressable onPress={() => onFavoritesClick()}>
         <Heart
-          fill={toogleOnlyFavorites ? theme.white : theme.primary}
-          color={toogleOnlyFavorites ? theme.black : theme.primary}
+          fill={isFavorites ? theme.primary : theme.white}
+          color={isFavorites ? theme.primary : theme.black}
           strokeWidth={2}
           size={28}
         />

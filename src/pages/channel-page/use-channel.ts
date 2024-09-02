@@ -6,16 +6,13 @@ import { addFavoriteChannel, getFavoritesChannels, removeFavoriteChannel } from 
 export function useChannel() {
     const [channels, setChannels] = useState<Channel[]>([]);
     const [searchFilter, setSearchFilter] = useState("");
-    const [toggleOnlyFavorites, setToggleOnlyFavorites] = useState(false);
+    const [showFavorites, setShowFavorites] = useState(false);
     const [favoriteChannels, setFavoriteChannels] = useState<string[]>([]);
 
     useEffect(() => {
         getChannelsInfo();
         getFavoriteChannelsInfo();
     }, []);
-    useEffect(() => {
-        onlyFavorites();
-    }, [])
 
     const getChannelsInfo = async () => {
         const channels = await getChannels();
@@ -27,23 +24,22 @@ export function useChannel() {
     }
 
     const filterChannels = () => {
+        if (showFavorites) {
+            const channelFavoritesFilter = channels.filter((channel) =>
+                isFavoriteChannel(channel.code)
+            )
+            return channelFavoritesFilter.filter((channel) => {
+                return channel.name.toLowerCase().includes(searchFilter.toLowerCase());
+            });
+        }
+
         return channels.filter((channel) => {
             return channel.name.toLowerCase().includes(searchFilter.toLowerCase());
         });
     }
-    const onlyFavorites = () => {
-        setToggleOnlyFavorites(!toggleOnlyFavorites);
 
-        if (toggleOnlyFavorites) {
-            const onlyFavoritesFilter = channels.filter((channel) => {
-                const onlyFavoritesVerification = isFavoriteChannel(channel.code);
-                if (onlyFavoritesVerification) {
-                    return channel;
-                }
-            })
-            setChannels(onlyFavoritesFilter);
-        }
-        getChannelsInfo();
+    const toggleFavorites = () => {
+        setShowFavorites(!showFavorites);
     }
 
     const saveFavoriteChannel = async (channelCode: string) => {
@@ -68,8 +64,8 @@ export function useChannel() {
         filterChannels,
         saveFavoriteChannel,
         isFavoriteChannel,
-        onlyFavorites,
-        toggleOnlyFavorites
+        toggleFavorites,
+        showFavorites
     }
 
 }
