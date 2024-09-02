@@ -2,21 +2,22 @@ import { Heart } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 import { makeStyle } from "./styles";
 import { useThemeContext } from "../../context/theme/hooks/use-theme-context";
-import { useState } from "react";
 
 type ItemListType = {
+  onFavorite: () => void;
+  isFavorite: boolean;
   title: string;
   desc: string;
-  favorite: boolean;
 };
 
-export function ItemList({ title: title, desc, favorite }: ItemListType) {
+export function ItemList({
+  title,
+  desc,
+  onFavorite,
+  isFavorite,
+}: ItemListType) {
   const style = makeStyle();
   const { theme } = useThemeContext();
-
-  const setFavorite = () => {
-    favorite = true;
-  };
 
   return (
     <View style={style.wrapper}>
@@ -24,12 +25,12 @@ export function ItemList({ title: title, desc, favorite }: ItemListType) {
         <Text style={style.tittle}>{title}</Text>
         <Text style={style.desc}>{desc}</Text>
       </View>
-      <Pressable onPress={() => setFavorite()}>
+      <Pressable onPress={() => onFavorite()}>
         <Heart
-          color={favorite ? theme.primary : theme.black}
+          color={isFavorite ? theme.primary : theme.black}
           strokeWidth={2}
           size={21}
-          fill={favorite ? theme.primary : theme.ligth_grey}
+          fill={isFavorite ? theme.primary : theme.ligth_grey}
         />
       </Pressable>
     </View>
