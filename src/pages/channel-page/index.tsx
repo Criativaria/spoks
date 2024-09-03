@@ -16,6 +16,7 @@ export function ChannelsPage() {
     isFavoriteChannel,
     toggleFavorites,
     showFavorites,
+    formatProgram,
   } = useChannel();
 
   return (
@@ -37,7 +38,7 @@ export function ChannelsPage() {
           renderItem={({ item }) => (
             <ItemList
               title={item.name}
-              desc={item.name}
+              desc={formatProgram(item.current_program)}
               onFavorite={() => saveFavoriteChannel(item.code)}
               isFavorite={isFavoriteChannel(item.code) ? true : false}
             />

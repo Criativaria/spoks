@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Channel } from "../../api/channels/types";
 import { getChannels } from "../../api/channels";
 import { addFavoriteChannel, getFavoritesChannels, removeFavoriteChannel } from "../../utils/storage/channels";
+import { filter } from "cheerio/dist/commonjs/api/traversing";
+import { Program } from "../../api/programs/types";
 
 export function useChannel() {
     const [channels, setChannels] = useState<Channel[]>([]);
@@ -24,18 +26,19 @@ export function useChannel() {
     }
 
     const filterChannels = () => {
+        let filterChannels = channels;
+
         if (showFavorites) {
-            const channelFavoritesFilter = channels.filter((channel) =>
+            filterChannels = filterChannels.filter((channel) =>
                 isFavoriteChannel(channel.code)
             )
-            return channelFavoritesFilter.filter((channel) => {
-                return channel.name.toLowerCase().includes(searchFilter.toLowerCase());
-            });
         }
-
-        return channels.filter((channel) => {
-            return channel.name.toLowerCase().includes(searchFilter.toLowerCase());
-        });
+        if (searchFilter) {
+            filterChannels = filterChannels.filter(({ name }) =>
+                name.toLowerCase().includes(searchFilter.toLowerCase())
+            );
+        }
+        return filterChannels;
     }
 
     const toggleFavorites = () => {
@@ -57,6 +60,18 @@ export function useChannel() {
         return favoriteChannelVerification;
     }
 
+    const formatProgram = (program?: Program) => {
+        if (!program) {
+            return "Nenhum programa em exibição.";
+        }
+        const programDate = new Date(program.start_at);
+        const programHour = programDate.getHours().toString().padStart(2, "0");
+        const programMin = programDate.getMinutes().toString().padStart(2, "0");
+        const completeDate = programHour + ":" + programMin;
+
+        return completeDate + "-" + program.name;
+    }
+
     return {
         channels,
         searchFilter,
@@ -65,7 +80,8 @@ export function useChannel() {
         saveFavoriteChannel,
         isFavoriteChannel,
         toggleFavorites,
-        showFavorites
+        showFavorites,
+        formatProgram
     }
 
 }
