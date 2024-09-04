@@ -1,7 +1,6 @@
 import { CreateStyle } from "../../utils/create-style";
 
 export const makeStyle = CreateStyle((theme) => ({
-
     wrapper: {
         display: "flex",
         flexDirection: "row",
@@ -25,6 +24,4 @@ export const makeStyle = CreateStyle((theme) => ({
         fontFamily: theme.font_regular,
         letterSpacing: 1.2
     }
-
-
 }))

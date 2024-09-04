@@ -1,8 +1,8 @@
 export type ThemeData = {
-    backgroundColor: string
-    white: string
-    black: string
-    primary: string
+    backgroundColor: string,
+    white: string,
+    black: string,
+    primary: string,
     light_primary: string,
     ligth_grey: string
     font_bold: string

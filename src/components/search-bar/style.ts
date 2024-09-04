@@ -15,4 +15,4 @@ export const makeStyle = CreateStyle((theme) => ({
         fontFamily: theme.font_regular,
         backgroundColor: theme.light_primary
     }
-}))
+}));

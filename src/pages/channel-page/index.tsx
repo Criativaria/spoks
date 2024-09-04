@@ -40,7 +40,7 @@ export function ChannelsPage() {
               title={item.name}
               desc={formatProgram(item.current_program)}
               onFavorite={() => saveFavoriteChannel(item.code)}
-              isFavorite={isFavoriteChannel(item.code) ? true : false}
+              isFavorite={isFavoriteChannel(item.code)}
             />
           )}
         />

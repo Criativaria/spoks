@@ -67,9 +67,9 @@ export function useChannel() {
         const programDate = new Date(program.start_at);
         const programHour = programDate.getHours().toString().padStart(2, "0");
         const programMin = programDate.getMinutes().toString().padStart(2, "0");
-        const completeDate = programHour + ":" + programMin;
+        const programTime = programHour + ":" + programMin;
 
-        return completeDate + "-" + program.name;
+        return programTime + "-" + program.name;
     }
 
     return {
@@ -82,7 +82,7 @@ export function useChannel() {
         toggleFavorites,
         showFavorites,
         formatProgram
-    }
+    };
 
 }
 

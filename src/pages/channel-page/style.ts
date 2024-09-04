@@ -7,6 +7,4 @@ export const makeStyle = CreateStyle((theme) => ({
         height: 600,
         marginVertical: 10
     }
-
-
-}))
+}));
