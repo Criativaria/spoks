@@ -24,4 +24,4 @@ export const makeStyle = CreateStyle((theme) => ({
         fontFamily: theme.font_regular,
         letterSpacing: 1.2
     }
-}))
+}));
