@@ -10,6 +10,11 @@ type ItemListType = {
   desc: string;
 };
 
+type ResumeTextType = {
+  text: string;
+  limit: number;
+};
+
 export function ItemList({
   title,
   desc,
@@ -19,11 +24,17 @@ export function ItemList({
   const style = makeStyle();
   const { theme } = useThemeContext();
 
+  const resumeText = ({ text, limit }: ResumeTextType) => {
+    return text.length > 25 ? text.slice(0, limit).concat("...") : text;
+  };
+
   return (
     <View style={style.wrapper}>
       <View>
-        <Text style={style.tittle}>{title}</Text>
-        <Text style={style.desc}>{desc}</Text>
+        <Text style={style.tittle}>
+          {resumeText({ text: title, limit: 25 })}
+        </Text>
+        <Text style={style.desc}>{resumeText({ text: desc, limit: 35 })}</Text>
       </View>
       <Pressable onPress={() => onFavorite()}>
         <Heart

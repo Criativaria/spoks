@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Channel } from "../../api/channels/types";
 import { getChannels } from "../../api/channels";
 import { addFavoriteChannel, getFavoritesChannels, removeFavoriteChannel } from "../../utils/storage/channels";
-import { filter } from "cheerio/dist/commonjs/api/traversing";
 import { Program } from "../../api/programs/types";
 
 export function useChannel() {
