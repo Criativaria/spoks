@@ -60,7 +60,6 @@ export function useProgram({ channelCode }: ProgramsType) {
         const favoriteChannelVerification = favoritePrograms.some((favoriteProgram) => favoriteProgram.code === program.code);
         return favoriteChannelVerification;
     }
-    //comparar essa verificação usando o CODE do programa.
 
     const formatProgram = (program?: Program) => {
         if (!program) {

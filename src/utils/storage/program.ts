@@ -13,7 +13,6 @@ export async function getFavoritesPrograms(): Promise<Program[]> {
     }
 }
 export async function addFavoriteProgram(props: Program) {
-    console.log("localStortage", props)
     try {
         const favoritesPrograms: Program[] = await getFavoritesPrograms();
 
