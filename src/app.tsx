@@ -3,6 +3,8 @@ import { ThemeProvider } from "./context/theme/theme.provider";
 import { StatusBar } from "expo-status-bar";
 import { useFont } from "./hooks/use-font";
 import { ChannelsPage } from "./pages/channel-page";
+import { ProgramsPage } from "./pages/program-page";
+import { NavigationContainer } from "@react-navigation/native";
 
 export function App() {
   const [loaded] = useFont();
@@ -11,20 +13,23 @@ export function App() {
     return;
   }
   return (
-    <SafeAreaView style={{ width: "100%", height: "100%" }}>
-      <ThemeProvider>
-        <StatusBar style="dark" />
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            display: "flex",
-            padding: 40,
-          }}
-        >
-          <ChannelsPage />
-        </View>
-      </ThemeProvider>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <ThemeProvider>
+          <StatusBar style="dark" />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              display: "flex",
+              padding: 40,
+            }}
+          >
+            <ProgramsPage channelCode="GRD" />
+            {/* <ChannelsPage /> */}
+          </View>
+        </ThemeProvider>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
