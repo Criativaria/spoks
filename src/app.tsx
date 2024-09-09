@@ -5,6 +5,7 @@ import { useFont } from "./hooks/use-font";
 import { ChannelsPage } from "./pages/channel-page";
 import { ProgramsPage } from "./pages/program-page";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export function App() {
   const [loaded] = useFont();
@@ -12,24 +13,33 @@ export function App() {
   if (!loaded) {
     return;
   }
+
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <SafeAreaView style={{ width: "100%", height: "100%" }}>
-        <ThemeProvider>
-          <StatusBar style="dark" />
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              display: "flex",
-              padding: 40,
-            }}
-          >
-            <ProgramsPage channelCode="GRD" />
-            {/* <ChannelsPage /> */}
-          </View>
-        </ThemeProvider>
-      </SafeAreaView>
+      <ThemeProvider>
+        <StatusBar style="dark" />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <Stack.Navigator initialRouteName="channel">
+            <Stack.Screen
+              name="channel"
+              component={ChannelsPage}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="program"
+              component={ProgramsPage}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </View>
+      </ThemeProvider>
     </NavigationContainer>
   );
 }

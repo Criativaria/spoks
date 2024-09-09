@@ -4,12 +4,15 @@ import { PageTitle } from "../../components/page-tittle";
 import { useProgram } from "./use-program";
 import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
+import { RouteProp, useRoute } from "@react-navigation/native";
 
 export type ProgramsType = {
   channelCode: string;
 };
 
-export function ProgramsPage({ channelCode }: ProgramsType) {
+export function ProgramsPage() {
+  const route = useRoute<RouteProp<{ params: ProgramsType }>>();
+  const { channelCode } = route.params;
   const style = makeStyle();
 
   const {
