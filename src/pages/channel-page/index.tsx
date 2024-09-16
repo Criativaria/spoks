@@ -6,6 +6,7 @@ import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function ChannelsPage() {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -23,7 +24,7 @@ export function ChannelsPage() {
   } = useChannel();
 
   return (
-    <View>
+    <SafeAreaView>
       <PageTitle
         arrow={false}
         heart={true}
@@ -51,6 +52,6 @@ export function ChannelsPage() {
           )}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

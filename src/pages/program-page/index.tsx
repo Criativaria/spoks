@@ -5,6 +5,7 @@ import { useProgram } from "./use-program";
 import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
 import { RouteProp, useRoute } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export type ProgramsType = {
   channelCode: string;
@@ -27,7 +28,7 @@ export function ProgramsPage() {
   } = useProgram({ channelCode });
 
   return (
-    <View>
+    <SafeAreaView>
       <PageTitle
         arrow={false}
         heart={true}
@@ -52,6 +53,6 @@ export function ProgramsPage() {
           )}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
