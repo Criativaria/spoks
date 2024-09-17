@@ -17,7 +17,7 @@ export function App() {
 
   return (
     <SafeAreaProvider>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} tokenCache={tokenCache}>
         <ThemeProvider>
           <StatusBar style="dark" />
           <Routes />
