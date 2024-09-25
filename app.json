@@ -28,5 +28,6 @@
       "expo-font",
       "expo-secure-store"
     ]
+    
   }
 }
