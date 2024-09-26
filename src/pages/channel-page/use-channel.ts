@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Channel } from "../../api/channels/types";
 import { getChannels } from "../../api/channels";
-import { addFavoriteChannel, getFavoritesChannels, removeFavoriteChannel } from "../../utils/storage/channels";
+import { useChannelStorage } from "../../utils/storage/channels";
 import { Program } from "../../api/programs/types";
 
 export function useChannel() {
@@ -9,6 +9,7 @@ export function useChannel() {
     const [searchFilter, setSearchFilter] = useState("");
     const [showFavorites, setShowFavorites] = useState(false);
     const [favoriteChannels, setFavoriteChannels] = useState<string[]>([]);
+    const { getFavoritesChannels, addFavoriteChannel, removeFavoriteChannel } = useChannelStorage()
 
     useEffect(() => {
         getChannelsInfo();

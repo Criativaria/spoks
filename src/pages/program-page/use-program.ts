@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Program } from "../../api/programs/types";
 import { getPrograms } from "../../api/programs";
 import { ProgramsType } from ".";
-import { addFavoriteProgram, getFavoritesPrograms, removeFavoriteProgram } from "../../utils/storage/program";
+import { useProgramStorage } from "../../utils/storage/program";
 
 export function useProgram({ channelCode }: ProgramsType) {
 
@@ -10,6 +10,8 @@ export function useProgram({ channelCode }: ProgramsType) {
     const [searchFilter, setSearchFilter] = useState("");
     const [showFavorites, setShowFavorites] = useState(false);
     const [favoritePrograms, setFavoritePrograms] = useState<Program[]>([]);
+
+    const { addFavoriteProgram, getFavoritesPrograms, removeFavoriteProgram } = useProgramStorage();
 
     useEffect(() => {
         getProgramsInfo();
