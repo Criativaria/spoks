@@ -4,8 +4,8 @@ import { ProgramsPage } from "../../pages/program-page";
 import { HomePage } from "../../pages/home-page";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuth } from "@clerk/clerk-expo";
-import { useEffect } from "react";
-import { getFavoriteChannels } from "../../api/user/channels";
+import { ExemplePage } from "../../pages/exemple-page";
+
 
 export function Routes() {
 
@@ -13,12 +13,11 @@ export function Routes() {
   const { isSignedIn, isLoaded } = useAuth();
 
   if (!isLoaded) return;
-
   if (!isSignedIn) return <HomePage />;
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
+      <Stack.Navigator initialRouteName="channel">
         <Stack.Screen
           name="channel"
           component={ChannelsPage}
@@ -29,7 +28,13 @@ export function Routes() {
           component={ProgramsPage}
           options={{ headerShown: false }}
         />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Screen
+          name="home"
+          component={ExemplePage}
+          options={{ headerShown: false }}
+        />
+
+      </Stack.Navigator >
+    </NavigationContainer >
   );
 }
