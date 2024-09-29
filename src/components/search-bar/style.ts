@@ -13,9 +13,9 @@ export const makeStyle = CreateStyle((theme) => ({
     },
     searchBar: {
         padding: 5,
-        width: 300,
         height: 30,
-        fontSize: 12,
+        width: 250,
+        fontSize: theme.fontSize * 12,
         fontFamily: theme.font_regular,
         backgroundColor: theme.ligth_grey,
     }

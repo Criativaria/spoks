@@ -12,7 +12,7 @@ export const makeStyle = CreateStyle((theme) => ({
     },
     text: {
         fontFamily: theme.font_bold,
-        fontSize: 15
+        fontSize: theme.fontSize * 15
 
     }
 

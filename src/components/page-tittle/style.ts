@@ -19,7 +19,7 @@ export const makeStyle = CreateStyle((theme) => ({
     },
     title: {
         fontFamily: theme.font_bold,
-        fontSize: 30,
+        fontSize: theme.fontSize * 30,
         textAlign: "center",
         letterSpacing: 1.2
     },

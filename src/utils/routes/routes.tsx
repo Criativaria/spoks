@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ChannelsPage } from "../../pages/channel-page";
 import { ProgramsPage } from "../../pages/program-page";
-import { HomePage } from "../../pages/home-page";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuth } from "@clerk/clerk-expo";
-import { ExemplePage } from "../../pages/exemple-page";
 
+import * as Linking from "expo-linking"
+import { HomePage } from "../../pages/home-page";
+import ConfigPage from "../../pages/config-page";
 
 export function Routes() {
 
@@ -13,11 +14,12 @@ export function Routes() {
   const { isSignedIn, isLoaded } = useAuth();
 
   if (!isLoaded) return;
-  if (!isSignedIn) return <HomePage />;
+
+  // if (!isSignedIn) return <HomePage />;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="channel">
+    <NavigationContainer linking={{ prefixes: [Linking.createURL("/")] }}>
+      <Stack.Navigator initialRouteName="config">
         <Stack.Screen
           name="channel"
           component={ChannelsPage}
@@ -29,12 +31,16 @@ export function Routes() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="home"
-          component={ExemplePage}
+          name="config"
+          component={ConfigPage}
           options={{ headerShown: false }}
         />
-
-      </Stack.Navigator >
-    </NavigationContainer >
+        <Stack.Screen
+          name="home"
+          component={HomePage}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
