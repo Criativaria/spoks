@@ -19,7 +19,7 @@ export default function ConfigPage() {
 
             <Button text="ativar modo de alto contraste"
                 textStyle={{ color: theme.white }}
-                wraperStyle={{ width: 30, height: 40, backgroundColor: theme.black }} />
+            />
 
             <Button text="configurar depois" />
 

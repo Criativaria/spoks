@@ -3,7 +3,6 @@ import { ChannelsPage } from "../../pages/channel-page";
 import { ProgramsPage } from "../../pages/program-page";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuth } from "@clerk/clerk-expo";
-
 import * as Linking from "expo-linking"
 import { HomePage } from "../../pages/home-page";
 import ConfigPage from "../../pages/config-page";
