@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native"
-import { ThemeData } from "../styles/theme";
 import { useThemeContext } from "../context/theme/hooks/use-theme-context";
+import { ThemeContext } from "../context/theme/theme.contex";
 
 type CreateStyleSheet = ReturnType<typeof StyleSheet["create"]>;
 
-export type CreateStyleCallBack<T> = (theme: ThemeData) => T
+export type CreateStyleCallBack<T> = (theme: ThemeContext["theme"]) => T
 
 export function CreateStyle<T extends CreateStyleSheet>(createStyleSheet: CreateStyleCallBack<T>) {
     return function () {

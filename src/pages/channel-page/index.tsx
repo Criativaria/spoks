@@ -1,12 +1,18 @@
-import { FlatList, View } from "react-native";
+import { FlatList, Pressable, View } from "react-native";
 import { ItemList } from "../../components/item-list";
 import { PageTitle } from "../../components/page-tittle";
 import { useChannel } from "./use-channel";
-import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { makeStyle } from "./style";
+import { Footer } from "../../components/footer";
+import { Settings } from "lucide-react-native";
 
 export function ChannelsPage() {
-  const style = makeStyle();
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const style = makeStyle()
 
   const {
     searchFilter,
@@ -20,31 +26,44 @@ export function ChannelsPage() {
   } = useChannel();
 
   return (
-    <View>
-      <PageTitle
-        arrow={false}
-        heart={true}
-        title={showFavorites ? "Canais Favoritos" : "Canais"}
-        onFavoritesClick={() => toggleFavorites()}
-        isFavorites={showFavorites}
-      />
+    <SafeAreaView style={style.container}>
+      <View style={style.content}>
 
-      <SearchBar onChangeText={setSearchFilter} value={searchFilter} />
+        {/* isso aqui é temporario, dpois vou passar para o page tittle. */}
+        <Pressable onPress={() => navigation.navigate("config")} >
+          <Settings color={"#000"} />
+        </Pressable>
 
-      <View style={style.list}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={filterChannels()}
-          renderItem={({ item }) => (
-            <ItemList
-              title={item.name}
-              desc={formatProgram(item.current_program)}
-              onFavorite={() => saveFavoriteChannel(item.code)}
-              isFavorite={isFavoriteChannel(item.code)}
-            />
-          )}
+
+        <PageTitle
+          settings={false}
+          heart={true}
+          title={showFavorites ? "Canais Favoritos" : "Canais"}
+          onFavoritesClick={() => toggleFavorites()}
+          isFavorites={showFavorites}
         />
+
+        <SearchBar onChangeText={setSearchFilter} value={searchFilter} />
+
+        <View style={style.list}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={filterChannels()}
+            renderItem={({ item }) => (
+              <ItemList
+                onClick={() =>
+                  navigation.push("program", { channelCode: item.code })
+                }
+                title={item.name}
+                desc={formatProgram(item.current_program)}
+                onFavorite={() => saveFavoriteChannel(item.code)}
+                isFavorite={isFavoriteChannel(item.code)}
+              />
+            )}
+          />
+        </View>
+        <Footer />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

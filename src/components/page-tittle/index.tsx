@@ -1,4 +1,4 @@
-import { ArrowLeft, Heart } from "lucide-react-native";
+import { ArrowLeft, Heart, Settings } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 import { makeStyle } from "./style";
 import { useThemeContext } from "../../context/theme/hooks/use-theme-context";
@@ -6,14 +6,14 @@ import { useThemeContext } from "../../context/theme/hooks/use-theme-context";
 type PageTittleType = {
   title: string;
   heart: boolean;
-  arrow: boolean;
+  settings: boolean;
   onFavoritesClick: () => void;
   isFavorites: boolean;
 };
 
 export function PageTitle({
   title,
-  arrow,
+  settings,
   onFavoritesClick,
   isFavorites,
 }: PageTittleType) {
@@ -21,8 +21,8 @@ export function PageTitle({
   const { theme } = useThemeContext();
   return (
     <View style={style.wrapper}>
-      <ArrowLeft
-        style={arrow ? style.iconShowUp : style.iconHide}
+      <Settings
+        style={settings ? style.iconShowUp : style.iconHide}
         color={theme.black}
         strokeWidth={2}
         size={28}

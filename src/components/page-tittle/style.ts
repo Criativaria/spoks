@@ -7,19 +7,19 @@ export const makeStyle = CreateStyle((theme) => ({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
-        width: 360,
         height: 95,
     },
     titleView: {
-        width: 180,
-        height: 95,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '100%',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: theme.primary,
+        paddingBottom: 3,
+        marginBottom: 0,
     },
     title: {
         fontFamily: theme.font_bold,
-        fontSize: 30,
+        fontSize: theme.fontSize * 30,
         textAlign: "center",
         letterSpacing: 1.2
     },
@@ -27,7 +27,7 @@ export const makeStyle = CreateStyle((theme) => ({
         display: "flex"
     },
     iconHide: {
-        display: "none"
+        display: "flex"
     }
 
 }))

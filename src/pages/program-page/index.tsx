@@ -4,12 +4,17 @@ import { PageTitle } from "../../components/page-tittle";
 import { useProgram } from "./use-program";
 import { makeStyle } from "./style";
 import { SearchBar } from "../../components/search-bar";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Footer } from "../../components/footer";
 
 export type ProgramsType = {
   channelCode: string;
 };
 
-export function ProgramsPage({ channelCode }: ProgramsType) {
+export function ProgramsPage() {
+  const route = useRoute<RouteProp<{ params: ProgramsType }>>();
+  const { channelCode } = route.params;
   const style = makeStyle();
 
   const {
@@ -24,31 +29,34 @@ export function ProgramsPage({ channelCode }: ProgramsType) {
   } = useProgram({ channelCode });
 
   return (
-    <View>
-      <PageTitle
-        arrow={false}
-        heart={true}
-        title={showFavorites ? "Programas Favoritos" : "Programas"}
-        onFavoritesClick={() => toggleFavorites()}
-        isFavorites={showFavorites}
-      />
-
-      <SearchBar onChangeText={setSearchFilter} value={searchFilter} />
-
-      <View style={style.list}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={filterPrograms()}
-          renderItem={({ item }) => (
-            <ItemList
-              title={formatProgram(item)}
-              desc={item.category}
-              onFavorite={() => saveFavoriteProgram(item)}
-              isFavorite={isFavoriteProgram(item)}
-            />
-          )}
+    <SafeAreaView style={style.container}>
+      <View style={style.content}>
+        <PageTitle
+          settings={false}
+          heart={true}
+          title={showFavorites ? "Programas Favoritos" : "Programas"}
+          onFavoritesClick={() => toggleFavorites()}
+          isFavorites={showFavorites}
         />
+
+        <SearchBar onChangeText={setSearchFilter} value={searchFilter} />
+
+        <View style={style.list}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={filterPrograms()}
+            renderItem={({ item }) => (
+              <ItemList
+                title={formatProgram(item)}
+                desc={item.category}
+                onFavorite={() => saveFavoriteProgram(item)}
+                isFavorite={isFavoriteProgram(item)}
+              />
+            )}
+          />
+        </View>
+        <Footer />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

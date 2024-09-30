@@ -7,12 +7,16 @@ export const makeStyle = CreateStyle((theme) => ({
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: theme.ligth_grey,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        padding: 5,
+        borderRadius: 8,
     },
     searchBar: {
+        padding: 5,
+        height: 30,
         width: 250,
-        fontSize: 12,
+        fontSize: theme.fontSize * 12,
         fontFamily: theme.font_regular,
-        backgroundColor: theme.light_primary
+        backgroundColor: theme.ligth_grey,
     }
 }));

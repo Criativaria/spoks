@@ -8,6 +8,7 @@ type ItemListType = {
   isFavorite: boolean;
   title: string;
   desc: string;
+  onClick?: () => void;
 };
 
 type ResumeTextType = {
@@ -20,6 +21,7 @@ export function ItemList({
   desc,
   onFavorite,
   isFavorite,
+  onClick,
 }: ItemListType) {
   const style = makeStyle();
   const { theme } = useThemeContext();
@@ -30,12 +32,16 @@ export function ItemList({
 
   return (
     <View style={style.wrapper}>
-      <View>
-        <Text style={style.tittle}>
-          {resumeText({ text: title, limit: 25 })}
-        </Text>
-        <Text style={style.desc}>{resumeText({ text: desc, limit: 35 })}</Text>
-      </View>
+      <Pressable onPress={onClick}>
+        <View>
+          <Text style={style.tittle}>
+            {resumeText({ text: title, limit: 25 })}
+          </Text>
+          <Text style={style.desc}>
+            {resumeText({ text: desc, limit: 35 })}
+          </Text>
+        </View>
+      </Pressable>
       <Pressable onPress={() => onFavorite()}>
         <Heart
           color={isFavorite ? theme.primary : theme.black}

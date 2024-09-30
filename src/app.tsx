@@ -1,35 +1,34 @@
-import { SafeAreaView, View } from "react-native";
 import { ThemeProvider } from "./context/theme/theme.provider";
 import { StatusBar } from "expo-status-bar";
 import { useFont } from "./hooks/use-font";
-import { ChannelsPage } from "./pages/channel-page";
-import { ProgramsPage } from "./pages/program-page";
-import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ClerkProvider } from "@clerk/clerk-expo";
+import { Routes } from "./utils/routes/routes";
+import { tokenCache } from "./api/user/token-cache";
+import { StorageProvider } from "./context/storage/storage-context";
+import { SettingsProvider } from "./context/settings/settings-contex";
+
+const PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY as string;
 
 export function App() {
   const [loaded] = useFont();
 
   if (!loaded) {
-    return;
+    return null;
   }
+
   return (
-    <NavigationContainer>
-      <SafeAreaView style={{ width: "100%", height: "100%" }}>
-        <ThemeProvider>
-          <StatusBar style="dark" />
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              display: "flex",
-              padding: 40,
-            }}
-          >
-            <ProgramsPage channelCode="GRD" />
-            {/* <ChannelsPage /> */}
-          </View>
-        </ThemeProvider>
-      </SafeAreaView>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} tokenCache={tokenCache}>
+        <StorageProvider>
+          <SettingsProvider>
+            <ThemeProvider>
+              <StatusBar style="dark" />
+              <Routes />
+            </ThemeProvider>
+          </SettingsProvider>
+        </StorageProvider>
+      </ClerkProvider>
+    </SafeAreaProvider>
   );
 }

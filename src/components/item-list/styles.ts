@@ -15,12 +15,12 @@ export const makeStyle = CreateStyle((theme) => ({
         marginBottom: 8
     },
     tittle: {
-        fontSize: 16,
+        fontSize: theme.fontSize * 16,
         fontFamily: theme.font_bold,
         letterSpacing: 1.2
     },
     desc: {
-        fontSize: 12,
+        fontSize: theme.fontSize * 12,
         fontFamily: theme.font_regular,
         letterSpacing: 1.2
     }
