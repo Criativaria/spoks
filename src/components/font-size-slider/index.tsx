@@ -16,8 +16,8 @@ export function FontSizeSlider() {
             <Text style={style.subTittle} >Arraste para ajustar o tamanho</Text>
             <Slider
                 style={{ width: 225, height: 40 }}
-                minimumValue={0.5}
-                maximumValue={2}
+                minimumValue={0.75}
+                maximumValue={1.25}
                 minimumTrackTintColor={theme.primary}
                 maximumTrackTintColor={theme.black}
                 value={fontSize}
